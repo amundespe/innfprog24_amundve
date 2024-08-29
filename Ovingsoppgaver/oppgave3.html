@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utregning</title>
+</head>
+<body>
+    <p id="average"></p>
+
+    <script>
+        // Vi deklarerer variabler for alderen til hvert familiemedlem
+        const age_far = 37;
+        const age_mor = 32;
+        const age_datter = 7;
+        const age_sonn = 2;
+
+        // Vi regner ut summen av alle aldrene
+        const total_age = age_far + age_mor + age_datter + age_sonn;
+
+        // Vi regner ut antall familiemedlemmer
+        const num_family_members = 4;
+
+        // Vi regner ut gjennomsnittsalderen
+        const average_age = total_age / num_family_members;
+
+        // Vi skriver ut gjennomsnittsalderen til elementet med id "average"
+        document.getElementById("average").innerHTML = "Gjennomsnittsalderen i familien er " + average_age + " år.";
+    </script>
+</body>
+</html>
