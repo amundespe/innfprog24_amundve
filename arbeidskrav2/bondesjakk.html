@@ -272,12 +272,13 @@
                 //brikke3, er alle like, og vi har en vinnerkombinasjon. Da 
                 if(brikke1 === brikke2 && brikke2 === brikke3) {
                     rundenVunnet = true;
+                    vinnendeKombinasjon = [vinnerKomboPlass1, vinnerKomboPlass2, vinnerKomboPlass3] //Lagt til en array som gjør om fargen på vinner-rekken.
                     break;
                 }
             }
 
             //Hvis runden er vunnet, skal vi gjøre noen handlinger:
-            if(rundenVunnet === true) {
+            if (rundenVunnet === true) {
                 //Skriv ut hvilken spiller som har vunnet
                 document.getElementById("playerturn").innerHTML = "Spiller " + player + " har vunnet!";
                 document.getElementById("playerturn").style.backgroundColor = "#FFD700"; //Modifisert "sjekkVinner" funksjonen sånn at den endrer bakgrunnsfargen når en spiller har vunnet, ved hjelp av Style backgroundColor egenskapen.
