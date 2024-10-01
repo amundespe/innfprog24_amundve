@@ -115,7 +115,7 @@
         var player = 1;
         var playermark = "X";
         //Dette skriver vi ut i <span>-tagene med id-ene "player" og "playermark" i <div>-tagen med id "playerturn"
-        document.getElementById("player").innerHTML = player;
+        document.getElementById("player").innerHTML = player; //Her var det originalt en kolon, det ble erstattet med et semikolon.
         document.getElementById("playermark").innerHTML = playermark;
 
         //Så lager vi en teller for å se hvor mange spill vi har spilt:
@@ -162,7 +162,7 @@
         document.getElementById("celle3").addEventListener("click", function() {
             spill(3);
         });
-        document.getElementById("celle4").addEventListener("click", function() {
+        document.getElementById("celle4").addEventListener("click", function() { //Her sto det originallt "addEventLner", det ble fikset.
             spill(4);
         });
         document.getElementById("celle5").addEventListener("click", function() {
@@ -191,7 +191,7 @@
                 var cellSpace = document.getElementById("celle"+celle).innerHTML;
                 
                 //Hvis den er ledig...
-                if(cellSpace === "") {
+                if(cellSpace === "") { //Her sto det originalt "ifff", det ble rettet.
                     //...sjekk hvilken spiller sin tur det er, og plasser riktig symbol på spillerbrettet
                     if (player === 1) {
                         //Plasser symbol på spillerbrettet i nettleseren
@@ -209,28 +209,12 @@
                     if(!spillerBrikker.includes("")) {
                         document.getElementById("playerturn").innerHTML = "Uavgjort! Ingen vant...";
                         spillStatus = false;
-                        return;
                     }
                     
                     //Når brikken er plassert på spillerbrettet, må vi sjekke om den - og brikkene rundt - 
                     //utgjør en vinnerkombinasjon. Denne funksjonaliteten ligger i funksjonen sjekkVinner(),
                     //siden dette er et litt større sett med handlinger og kan gi noen ulike utfall.
-                    setTimeout(function() {
-                        sjekkVinner();
-
-                        if (spillStatus === true) {
-                            if (player === 1) {
-                                player = 2;
-                                playermark = "O";
-                            } else {
-                                player = 1;
-                                playermark = "X";
-                            }
-                        document.getElementById("player").innerHTML = player;
-                        document.getElementById("playermark").innerHTML = playermark;
-                        }
-                    }, 1000);
-
+                    sjekkVinner();
 
                 //Men, hvis cellen ikke er ledig...
                 } else {
@@ -255,7 +239,7 @@
                 }
             //Hvis spillstatus er false, avslutter vi funksjonen uten å utføre noen handlinger.
             } else {
-                //Så returnerer vi spillet
+                //Så returnerer vi spillet  <-- Originalt var det bare en "/" her, det ble fikset.
                 return;
             }
         }
@@ -292,7 +276,7 @@
             if(rundenVunnet === true) {
                 //Skriv ut hvilken spiller som har vunnet
                 document.getElementById("playerturn").innerHTML = "Spiller " + player + " har vunnet!";
-                document.getElementById("playerturn").style.backgroundColor = "FFD700";
+                document.getElementById("playerturn").style.backgroundColor = "#FFD700";
                 //Gjør restart spill-knappen synlig
                 document.getElementById("newgame").style.display = "block";
                 //Sett spillstatus til false, slik at ingen spillere får plassere
@@ -322,7 +306,6 @@
             playermark = "X";
             // 4)
             document.getElementById("playerturn").innerHTML = 'Spiller <span id="player">1</span> (<span id="playermark">X</span>) sin tur:';
-            document.getElementById("playerturn").style.backgroundColor = "";
         }
     </script>
 </body>
