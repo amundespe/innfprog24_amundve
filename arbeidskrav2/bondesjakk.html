@@ -214,19 +214,12 @@
                     //Når brikken er plassert på spillerbrettet, må vi sjekke om den - og brikkene rundt - 
                     //utgjør en vinnerkombinasjon. Denne funksjonaliteten ligger i funksjonen sjekkVinner(),
                     //siden dette er et litt større sett med handlinger og kan gi noen ulike utfall.
-                    sjekkVinner();
-
-                //Men, hvis cellen ikke er ledig...
-                } else {
-                    //...skriver vi ut en beskjed til spilleren, og lar han velge en ny celle.
-                    alert("Denne cellen er opptatt. Vennligst velg en annen celle");
-                    return;
-                }
-
-                //Når spillerens tur er ferdig, er det neste spillers tur.
-                //Det viser vi ved å sette variabelen "player" til 2 hvis den var 1 denne turen, eller hvis den var 2, sett tilbake til 1.
-                //På samme måte må spillersymbolet veksles mellom X og O.
-                if (player === 1) {
+                    setTimeout(function() {
+                        sjekkVinner();
+                    //Når spillerens tur er ferdig, er det neste spillers tur.
+                    //Det viser vi ved å sette variabelen "player" til 2 hvis den var 1 denne turen, eller hvis den var 2, sett tilbake til 1.
+                    //På samme måte må spillersymbolet veksles mellom X og O.
+                if (player === 1) { //Flyttet dette inn i setTimeout, funket ikke før jeg gjorde det.
                     player = 2;
                     playermark = "O";
                 } else {
@@ -237,6 +230,16 @@
                     document.getElementById("player").innerHTML = player;
                     document.getElementById("playermark").innerHTML = playermark;
                 }
+                    }, 1000); //Forsinkelse på 1 sekund før sjekkVinner() kalles. Ved hjelp av setTimeout funksjonen.
+
+                //Men, hvis cellen ikke er ledig...
+                } else {
+                    //...skriver vi ut en beskjed til spilleren, og lar han velge en ny celle.
+                    alert("Denne cellen er opptatt. Vennligst velg en annen celle");
+                    return;
+                }
+
+
             //Hvis spillstatus er false, avslutter vi funksjonen uten å utføre noen handlinger.
             } else {
                 //Så returnerer vi spillet  <-- Originalt var det bare en "/" her, det ble fikset.
@@ -246,6 +249,7 @@
 
         function sjekkVinner() {
             var rundenVunnet = false;
+            var vinnendeKombinasjon = null; //Lagt til en variabel for vinnende kombinasjoner.
             //Vi må sjekke etter vinner for hver brikke som plasseres på brettet.
             // Dette gjør vi ved å gå gjennom alle vinnerkombinasjonene, og
             //sjekke om brikkene på spillbrettet er like ved indexene til vinnerkombinasjonene:
@@ -276,7 +280,13 @@
             if(rundenVunnet === true) {
                 //Skriv ut hvilken spiller som har vunnet
                 document.getElementById("playerturn").innerHTML = "Spiller " + player + " har vunnet!";
-                document.getElementById("playerturn").style.backgroundColor = "#FFD700";
+                document.getElementById("playerturn").style.backgroundColor = "#FFD700"; //Modifisert "sjekkVinner" funksjonen sånn at den endrer bakgrunnsfargen når en spiller har vunnet, ved hjelp av Style backgroundColor egenskapen.
+
+                if (vinnendeKombinasjon) { //Lagt til en funksjon som setter fargen på spillermerkene i spillerekken til gullfarget.
+                    for (var i = 0; i < vinnendeKombinasjon.length; i++) {
+                        document.getElementById("celle" + vinnendeKombinasjon[i]).style.color = "#FFD700"; 
+                    }
+                }
                 //Gjør restart spill-knappen synlig
                 document.getElementById("newgame").style.display = "block";
                 //Sett spillstatus til false, slik at ingen spillere får plassere
@@ -297,6 +307,7 @@
             var celleteller = 0;
             while (celleteller < 9) {
                 document.getElementById("celle" + celleteller).innerHTML = "";
+                document.getElementById("celle" + celleteller).style.color = "#fff"; //Tilbakestiller fargen til originalfarge.
                 celleteller++;
             }
             // 2)
@@ -306,6 +317,7 @@
             playermark = "X";
             // 4)
             document.getElementById("playerturn").innerHTML = 'Spiller <span id="player">1</span> (<span id="playermark">X</span>) sin tur:';
+            document.getElementById("playerturn").style.backgroundColor = ""; //Tilbakestiller bakgrunnsfargen når spillet restartes.
         }
     </script>
 </body>
