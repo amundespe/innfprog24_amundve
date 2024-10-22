@@ -91,11 +91,11 @@
             document.getElementById("grade").textContent = `Du fikk karakteren: ${grade}`;
         }
 
-            //Funksjon for å aktivere/deaktivere knappen basert på om input-feltene er fylt ut. 
-            function checkInputs() {
-            const exam1 = document.getElementById("exam1").value;
-            const exam2 = document.getElementById("exam2").value;
-            const button = document.getElementById("calculate");
+        //Funksjon for å aktivere/deaktivere knappen basert på om input-feltene er fylt ut. 
+        function checkInputs() {
+        const exam1 = document.getElementById("exam1").value;
+        const exam2 = document.getElementById("exam2").value;
+        const button = document.getElementById("calculate");
  
             //Aktiverer knappen dersom begge feltene har en verdi, deaktivererer knappen hvis ikke. Ved hjelp av !-operatoren som en logisk "ikke" (NOT) operatør blir knappen deaktivert hvis en av feltene er tomme.
             button.disabled = !(exam1 && exam2);
