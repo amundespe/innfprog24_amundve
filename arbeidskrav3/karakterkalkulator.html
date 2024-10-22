@@ -51,7 +51,7 @@
         {grade: "A", treshold: 100}
         ]
         
-        //Funksjon for å beregne karakter basert på input fra brukeren.
+        //Funksjon for å beregne karakter basert på input fra brukeren. 
         function calculateGrade() {
             //Henter verdier fra input-feltene-eksamen 1 og eksamen 2. Ved hjelp av parseFloat-funksjonen konverteres verdien til et flyttall.
             const exam1 = parseFloat(document.getElementById("exam1").value)
@@ -69,17 +69,17 @@
                 return
             }
 
-            //Maks antall poeng for hver eksamen blir definert.
+            //Maks antall poeng for hver eksamen blir definert. 
             const maxPoengExam1 = 10
             const maxPoengExam2 = 12
 
-            //Beregner prosentandelen basert på input-verdiene og de gitte vektningene.
+            //Beregner prosentandelen basert på input-verdiene og de gitte vektningene. 
             const percentage = (0.3* (exam1 / maxPoengExam1 * 100)) + (0.7 * (exam2 / maxPoengExam2 * 100))
 
-            //Setter karakteren som "F" som standard.
+            //Setter karakteren som "F" som standard. 
             let grade = "F";
 
-            //Går gjennom karakter-arrayen for å finne riktig karakter basert på prosentandelen ved hjelp av for-løkke.
+            //Går gjennom karakter-arrayen for å finne riktig karakter basert på prosentandelen ved hjelp av for-løkke. 
             for (let i = 0; i < grades.length; i++) {
                 if (percentage >= grades[i].treshold) {
                 grade = grades[i].grade;
@@ -87,11 +87,11 @@
             }
             console.log(`Determined Grade: ${grade}`); //Logging.
 
-            //Viser resultatet til brukeren.
+            //Viser resultatet til brukeren. 
             document.getElementById("grade").textContent = `Du fikk karakteren: ${grade}`;
         }
 
-            //Funksjon for å aktivere/deaktivere knappen basert på om input-feltene er fylt ut.
+            //Funksjon for å aktivere/deaktivere knappen basert på om input-feltene er fylt ut. 
             function checkInputs() {
             const exam1 = document.getElementById("exam1").value;
             const exam2 = document.getElementById("exam2").value;
