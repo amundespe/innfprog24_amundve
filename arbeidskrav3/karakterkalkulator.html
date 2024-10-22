@@ -14,8 +14,14 @@
             text-align: center;
             font-family: Arial, Helvetica, sans-serif;
         }
-        p{font-size: 30px;}
-        button {padding: 20px;}
+        h1 {font-size: 40px;}
+        p {font-size: 30px;}
+        button {padding: 20px; font-size: 20px;}
+        input {
+            height: 30px; 
+            width: 100px; 
+            font-size: 20px;
+        }
     </style>
 </head>
 <body>
@@ -35,7 +41,7 @@
     <p id="grade"></p>
 
     <script>
-        // Array fra oppgaveteksten. Definerer terskelverdiene for hver karaktergrad.
+        //Array fra oppgaveteksten. Definerer terskelverdiene for hver karaktergrad.
         const grades = [
         {grade: "F", treshold: 0},
         {grade: "E", treshold: 25},
@@ -59,7 +65,7 @@
 
             //Sjekker om karakterene er innenfor gyldig område, hvis ikke, får brukeren beskjed om å fylle inn karakterer innenfor gyldig område.
             if (exam1 < 0 || exam1 > 10 || exam2 < 0 || exam2 > 12) {
-                document.getElementById("grade").innerHTML = "Karakterene må være mellom 0 og 10 for eksamen 1 og 0 og 12 for eksamen 2"
+                document.getElementById("grade").innerHTML = "Karakterene må være mellom 0-10 for eksamen 1, og 0-12 for eksamen 2"
                 return
             }
 
@@ -95,7 +101,7 @@
             button.disabled = !(exam1 && exam2);
         }
 
-        //Legger til event listeners på input-feltene for å overvåke endringer.
+        //Event listeners på input-feltene for å overvåke endringer. Hvis det er endringer, kjører checkInputs-funksjonen.
         document.getElementById("exam1").addEventListener("input", checkInputs);
         document.getElementById("exam2").addEventListener("input", checkInputs);
 
