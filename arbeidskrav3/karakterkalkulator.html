@@ -30,7 +30,7 @@
         <label for="exam2">Karakter på eksamen 2:</label>
         <input id="exam2" type="number" />
     </p>
-    <button id="calculate" onclick="calculateGrade()">Regn ut</button>
+    <button id="calculate" onclick="calculateGrade()" disabled>Regn ut</button> <!-- Knappen er deaktivert til begge input-feltene er fylt ut. -->
 
     <p id="grade"></p>
 
@@ -64,11 +64,11 @@
             }
 
             //Maks antall poeng for hver eksamen blir definert.
-            const maxPoengExam = 10
-            const totalPoengExam2 = 12
+            const maxPoengExam1 = 10
+            const maxPoengExam2 = 12
 
             //Beregner prosentandelen basert på input-verdiene og de gitte vektningene.
-            const percentage = (0.3* (exam1 / maxPoengExam * 100)) + (0.7 * (exam2 / totalPoengExam2 * 100))
+            const percentage = (0.3* (exam1 / maxPoengExam1 * 100)) + (0.7 * (exam2 / maxPoengExam2 * 100))
 
             //Setter karakteren som "F" som standard.
             let grade = "F";
@@ -83,12 +83,29 @@
 
             //Viser resultatet til brukeren.
             document.getElementById("grade").textContent = `Du fikk karakteren: ${grade}`;
-
-            //Kilder:
-            //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN
-            //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseFloat
-            //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for
         }
+
+            //Funksjon for å aktivere/deaktivere knappen basert på om input-feltene er fylt ut.
+            function checkInputs() {
+            const exam1 = document.getElementById("exam1").value;
+            const exam2 = document.getElementById("exam2").value;
+            const button = document.getElementById("calculate");
+ 
+            //Aktiverer knappen dersom begge feltene har en verdi, deaktivererer knappen hvis ikke. Ved hjelp av !-operatoren som en logisk "ikke" (NOT) operatør blir knappen deaktivert hvis en av feltene er tomme.
+            button.disabled = !(exam1 && exam2);
+        }
+
+        //Legger til event listeners på input-feltene for å overvåke endringer.
+        document.getElementById("exam1").addEventListener("input", checkInputs);
+        document.getElementById("exam2").addEventListener("input", checkInputs);
+
+
+
+        //Kilder:
+        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN
+        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseFloat
+        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for
+        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_NOT
     </script>
 </body>
 </html>
