@@ -3,15 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>karakterkalkulator</title>
+    <title>Karakterkalkulator</title>
+    <style>
+        body {
+            background: #eee; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        p{font-size: 30px;}
+        button {padding: 20px;}
+    </style>
 </head>
 <body>
-    <div id="flex-container">
+    <header>
     <h1>Karakterkalkulator</h1>
+    </header>
+    <p>
+        <label for="exam1">Karakter på eksamen 1:</label>
+        <input id="exam1" type="number" />
+    </p>
+    <p>
+        <label for="exam2">Karakter på eksamen 2:</label>
+        <input id="exam2" type="number" />
+    </p>
+    <button id="calculate" onclick="calculateGrade()">Regn ut</button>
 
+    <p id="grade"></p>
 
     <script>
+        // Array fra oppgaveteksten. Definerer terskelverdiene for hver karaktergrad.
         const grades = [
         {grade: "F", treshold: 0},
         {grade: "E", treshold: 25},
@@ -19,19 +43,47 @@
         {grade: "C", treshold: 68},
         {grade: "B", treshold: 88},
         {grade: "A", treshold: 100}
-]
-
+        ]
+        
+        //Funksjon for å beregne karakter basert på input fra brukeren.
         function calculateGrade() {
-            const points = document.getElementById("points").value
-            let grade = ""
-            grades.forEach(g => {
-                if(points >= g.treshold) {
-                    grade = g.grade
-                }
-            })
-            document.getElementById("grade").innerHTML = `Du fikk karakteren: ${grade}`
+            //Henter verdier fra input-feltene-eksamen 1 og eksamen 2. Ved hjelp av parseFloat-funksjonen konverteres verdien til et flyttall.
+            const exam1 = parseFloat(document.getElementById("exam1").value)
+            const exam2 = parseFloat(document.getElementById("exam2").value)
+ 
+            //Sjekker om verdiene er gyldige tall ved hjelp av isNaN-funksjonen, hvis ikke, får brukeren beskjed om å fylle inn karakterer.
+            if (isNaN(exam1) || isNaN(exam2)) {
+                document.getElementById("grade").innerHTML = "Vennligst fyll inn karakterer"
+                return
+            }
+
+            //Sjekker om karakterene er innenfor gyldig område, hvis ikke, får brukeren beskjed om å fylle inn karakterer innenfor gyldig område.
+            if (exam1 < 0 || exam1 > 10 || exam2 < 0 || exam2 > 12) {
+                document.getElementById("grade").innerHTML = "Karakterene må være mellom 0 og 10 for eksamen 1 og 0 og 12 for eksamen 2"
+                return
+            }
+
+            //Maks antall poeng for hver eksamen blir definert.
+            const maxPoengExam = 10
+            const totalPoengExam2 = 12
+
+            //Beregner prosentandelen basert på input-verdiene og de gitte vektningene.
+            const percentage = (0.3* (exam1 / maxPoengExam * 100)) + (0.7 * (exam2 / totalPoengExam2 * 100))
+
+            //Setter karakteren som "F" som standard.
+            let grade = "F";
+
+            //Går gjennom karakter-arrayen for å finne riktig karakter basert på prosentandelen ved hjelp av for-løkke.
+            for (let i = 0; i < grades.length; i++) {
+                if (percentage >= grades[i].treshold) {
+                grade = grades[i].grade;
+                 }
+            }
+            console.log(`Determined Grade: ${grade}`); //Logging.
+
+            //Viser resultatet til brukeren.
+            document.getElementById("grade").textContent = `Du fikk karakteren: ${grade}`;
         }
     </script>
-    </div>
 </body>
 </html>
