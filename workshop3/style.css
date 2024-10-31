@@ -10,6 +10,13 @@ body {
     font-family: consolas, verdana, sans-serf;
 }
 
+#drawingarea {
+    background: url('background.jpg') no-repeat center center;
+    background-size: cover;
+    width: 800px; 
+    height: 600px; 
+}
+
 header {
     display: flex;
     justify-content: space-between;

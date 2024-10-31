@@ -31,6 +31,7 @@
         </nav>
     </header>
     <main>
+        <canvas id="drawingarea"></canvas>
         
         <section id="notebook">
             <div id="notebook-page">
@@ -74,6 +75,37 @@
         </section>
     </main>
     <script>
+        //Canvas konfigurasjon:
+        const canvas = document.getElementById('drawingarea');
+        canvas.width = 800;
+        canvas.height = 600;
+        const ctx = canvas.getContext('2d');
+
+        //Pauseknapp bakgrunn
+        ctx.beginPath();
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(630, 570, 200, 30);
+        ctx.closePath();
+
+        //Pauseknapp tekst
+        ctx.beginPath();
+        ctx.font = "20px Arial"; 
+        ctx.fillStyle = "#3c429b";
+        ctx.fillText("Press P to pause", 640, 590);
+        ctx.closePath();
+
+        //Sette opp et bildeobjekt og variabel for om bildet er lastet
+        const heroImage = new Image();
+        const heroLoaded = false;
+
+        //Tegne bildet når det er lastet
+        heroImage.onload = function() {
+            ctx.drawImage(heroImage, 380, 250);
+        }
+
+        //Sette bildets kilde
+        heroImage.src = "icons/fortran.svg";
+
         //PREPARE GAME CONFIG AND VARIABLES
         //TODO: config
         const gameConfig = {
