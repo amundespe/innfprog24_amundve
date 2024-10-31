@@ -94,6 +94,25 @@
         ctx.fillText("Press P to pause", 640, 590);
         ctx.closePath();
 
+        //Fortran konfigurasjon:
+        const fortran = {
+            speed: 5,
+            x: 380,
+            y: 250,
+            image: new Image(),
+        }
+
+        //Tegne Fortran
+        function drawFortran() {
+            fortran.image.src = "icons/fortran.svg";
+            ctx.drawImage(fortran.image, fortran.x, fortran.y);
+        }
+
+        //Tegne Fortran når bildet er lastet
+        fortran.image.onload = function() {
+            drawFortran();
+        }
+
         //Sette opp et bildeobjekt og variabel for om bildet er lastet
         const heroImage = new Image();
         const heroLoaded = false;
@@ -105,6 +124,14 @@
 
         //Sette bildets kilde
         heroImage.src = "icons/fortran.svg";
+
+        //Sette boolean for pause
+        let gamePaused = false; 
+
+        //Funskjon for å pause spillet
+        function togglePause() {
+            gamePaused = !gamePaused;
+        }
 
         //PREPARE GAME CONFIG AND VARIABLES
         //TODO: config
@@ -124,8 +151,6 @@
             functions: 3,
             arrays: 7
         }
-
-        
 
         //(BONUS) TODO: function for all prints
         function updateStaticUI() {
